@@ -1,0 +1,53 @@
+#––– Python -------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.mypy_cache/
+.pytest_cache/
+coverage.xml
+htmlcov/
+.cache/
+.env
+.env.*         # ex.: .env.local, .env.prod
+*.sqlite3
+
+#––– Virtual Envs ------------------------------------------
+venv/
+.venv/
+ENV/
+env/
+pip-wheel-metadata/
+
+#––– Editors / IDEs ----------------------------------------
+.vscode/
+.idea/
+*.sw?
+*~
+
+#––– OS artifacts ------------------------------------------
+.DS_Store
+Thumbs.db
+Icon?
+
+#––– Docker -------------------------------------------------
+docker-compose.override.yml
+postgres_data/      # named-volume bind mount (if ever converted to host dir)
+
+#––– Logs ---------------------------------------------------
+*.log
+logs/
+
+#––– Node / Front-end (caso tenha) -------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

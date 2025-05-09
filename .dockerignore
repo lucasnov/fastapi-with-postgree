@@ -1,0 +1,42 @@
+#–––– Git ---------------------------------------------------
+.git
+.gitignore
+
+#–––– Metadata / Docs --------------------------------------
+README*
+LICENSE*
+*.md
+
+#–––– Arquivos de host que não afetam o container ----------
+docker-compose*.yml
+.env                # variáveis de ambiente (injetadas em runtime)
+
+#–––– Compilados / Cachês ----------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+.build/
+.eggs/
+.mypy_cache/
+.pytest_cache/
+
+#–––– Virtual envs -----------------------------------------
+venv/
+.venv/
+ENV/
+env/
+
+#–––– Editor / Sistema -------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.sw?
+*~
+
+#–––– Testes & exemplos ------------------------------------
+tests/
+docs/
