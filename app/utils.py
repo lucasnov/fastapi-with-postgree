@@ -1,11 +1,3 @@
-"""
-Utilidades de hash de senha e JWT para a API.
-
-- hash_password / verify_password  ➜ bcrypt
-- create_access_token              ➜ gera JWT assinado
-- get_current_user                 ➜ dependência FastAPI para validar Bearer
-"""
-
 from datetime import datetime, timedelta
 from typing import Union
 import os

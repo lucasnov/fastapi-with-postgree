@@ -1,26 +1,24 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:15
     restart: unless-stopped
+    hostname: db
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER:-projeto}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-S3cur3P@ss}
+      POSTGRES_DB: ${POSTGRES_DB:-projeto}
+      DATABASE_URL: ${POSTGRES_HOST:-db}
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-projeto} -d $${POSTGRES_DB:-projeto}"]
       interval: 5s
       timeout: 5s
       retries: 10
       start_period: 10s
 
   app:
-    build: .
+    image: lucasnov/projeto1:v1
     ports:
       - "8000:8000"
     env_file:
@@ -30,5 +28,3 @@ services:
       db:
         condition: service_healthy
 
-volumes:
-  postgres_data:

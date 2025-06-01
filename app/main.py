@@ -1,9 +1,11 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from . import models, schemas, utils
 from .database import Base, engine, SessionLocal
 import httpx
 from bs4 import BeautifulSoup
+from datetime import datetime
+import socket
 
 
 app = FastAPI(title="Projeto API", version="0.1.0")
@@ -18,7 +20,17 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/signup", response_model=schemas.UserResponse, status_code=status.HTTP_201_CREATED)
+
+@app.get("/health-check")
+def health_check(request: Request):
+    return {
+        "statusCode": 200,
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "hostname": socket.gethostname()
+    }
+
+
+@app.post("/registrar", response_model=schemas.UserResponse, status_code=status.HTTP_201_CREATED)
 def signup(user: schemas.UserCreate, db: Session = Depends(get_db)):
     if db.query(models.User).filter(models.User.email == user.email).first():
         raise HTTPException(status_code=400, detail="Email já cadastrado.")
